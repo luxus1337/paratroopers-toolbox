@@ -70,5 +70,5 @@ Execute the suggestion:
 git push --set-upstream origin thinkOfACleverNameForYourPersonalPongProject
 ```
 
-Now you pushed your first change the server :).
+Now you pushed your first change the server :). Try to finish the pong game, if you have any question pm @luxus1337 on slack.
 
