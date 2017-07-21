@@ -29,7 +29,10 @@ function drawRectangle(xPos,yPos,xWidth, yWidth, color = "#FFFFFF") {
     context.fillRect(xPos, yPos, xWidth, yWidth);
 }
 
+//draw a white square
 drawRectangle(0,0,width,height);
 
-drawRectangle(30,30,100,100, "#FF0000");
+
+//draw a red square
+drawRectangle(30,30,50,50, "#FF0000");
 
