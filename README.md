@@ -53,6 +53,22 @@ If you think all your changes are added write a commit message like so:
 ```
 git commit -m "Player 2 movement is now working"
 ```
+Now it's time to push your code to the server using:
+```
+git push
+```
+You'll probably receive the following warning:
+```
+fatal: The current branch luxiPong has no upstream branch.
+To push the current branch and set the remote as upstream, use
 
+    git push --set-upstream origin thinkOfACleverNameForYourPersonalPongProject
 
+```
+Execute the suggestion:
+```
+git push --set-upstream origin thinkOfACleverNameForYourPersonalPongProject
+```
+
+Now you pushed your first change the server :).
 
