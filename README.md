@@ -16,11 +16,13 @@ To create a folder u can use "mkdir"
 ```
 mkdir _paratroopers
 ```
-Then go to the directory and clone the repository
+Then go to the directory and clone the repository, start vs code with the project open.
 
 ```
 cd ~/_paratroopers/
 git clone git@github.com:luxus1337/paratroopers-toolbox.git
+cd paratroopers-toolbox
+code .
 ```
 
 
