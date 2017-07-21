@@ -9,6 +9,9 @@ First you will need to install the following programs:
 
 Now lets create our first game please check out this repostiory by running the following command in CMDer (or your terminal of choice) in a folder where you want your paratroopers' projects to be (in the example this is ~/_paratroopers/):
 
+** Protip: "~" stands for your home directory **
+
+
 To create a folder u can use "mkdir"
 ```
 mkdir _paratroopers
