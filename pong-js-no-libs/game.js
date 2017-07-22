@@ -15,6 +15,10 @@ const gridSizeX = 41;
 const gridSizeY = 31;
 const backgroundColor = "#000000";
 
+
+
+/*HALLO DIT IS EVRN EEN TESTER*/
+
 /**
  * /CONFIG
  */
