@@ -50,7 +50,7 @@ const backgroundColor = "#000000";
 
 //speed is in units per second, a unit is a square on the playfield
 var ballSpeedX = 5;
-var ballSpeedY = 2;
+var ballSpeedY = 3;
 var ballSizeX = 1;
 var ballSizeY = 1;
 var ballColor = "#FFFFFF";
@@ -62,7 +62,7 @@ var batSizeX = 1;
 var batSizeY = 5;
 var batColor = "#FFFFFF";
 
-var bat1PositionX = 0.1;
+var bat1PositionX = 1;
 var bat1PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
 var bat1movingUp = false
 var bat1movingDown = false;
@@ -139,12 +139,12 @@ function update() {
             roundedBallPositionY >= bat1PositionY &&
             roundedBallPositionY < bat1PositionY + batSizeY
         ) {
-            //ball collided with player what do?
+        //ball collided with player what do?
             ballSpeedX = ballSpeedX * -1.1;
         }
     }
 
-    //@TODO: check for ball colission with player 2
+//@TODO: check for ball colission with player 2
         if (roundedBallPositionX === bat2PositionX) {
             if( roundedBallPositionY >= bat2PositionY &&
                 roundedBallPositionY < bat2PositionY +batSizeY
@@ -154,35 +154,35 @@ function update() {
     
         }
 
-    //@TODO: check the ball for boundary colission
-    // De ball hoeft alleen te weerkaatsen op de X as. Als die op de Y as zit heeft de player hem niet kunnen raken, aldus gewonnen.
+//@TODO: check the ball for boundary colission
+// De ball hoeft alleen te weerkaatsen op de X as. Als die op de Y as zit heeft de player hem niet kunnen raken, aldus gewonnen.
  
-    //Checks ball right side.
+//Checks ball right side.
         if (roundedBallPositionX >= gridSizeX) { 
             console.log("Ball out of bounds, start again");
         }
         
-    //Checks Left side
+//Checks Left side
         if (roundedBallPositionX < 0) {
             console.log("Ball out of bounds, start again");
         }
 
-    //Checks Top side, so a collision with boundary what has to result in a bounce.
+//Checks Top side, so a collision with boundary what has to result in a bounce.
         if (roundedBallPositionY < 0) {
-            ballSpeedX *= -1.1;
+             ballSpeedY *= -1.1;
         }
-    //Checks Bot side, same as topside, collision with boundary.
+//Checks Bot side, same as topside, collision with boundary.
         if (roundedBallPositionY >= gridSizeY) {
-            ballSpeedX *= 1.1;
+            ballSpeedY *= -1.1;
         }
-    }
+    
         
 
   
 
 
-    //@TODO: listen for player 1 input
-    //move player 1 up
+//@TODO: listen for player 1 input
+//move player 1 up
     if(bat1movingUp) {
         bat1PositionY = bat1PositionY - batSpeedY * deltaTime;
     } else if (bat1movingDown) {
@@ -211,6 +211,7 @@ function update() {
 
     drawGame();
     window.requestAnimationFrame(update);
+}
 
 
 window.requestAnimationFrame(update);
