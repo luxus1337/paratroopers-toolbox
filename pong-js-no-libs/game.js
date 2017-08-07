@@ -167,14 +167,14 @@
             //player 1 movement  
             if(bat1movingUp && bat1PositionY > 0) {
                 bat1PositionY = bat1PositionY - batSpeedY * deltaTime;
-            } else if (bat1movingDown && bat1PositionY >= gridSizeY) {
+            } else if (bat1movingDown && bat1PositionY <= gridSizeY) {
                 bat1PositionY = bat1PositionY + batSpeedY * deltaTime; 
             }
             
             //player 2 movement
             if(bat2movingUp && bat2PositionY > 0) {
                 bat2PositionY = bat2PositionY - batSpeedY * deltaTime;
-            } else if (bat2movingDown && bat2PositionY >= gridSizeY) {
+            } else if (bat2movingDown && bat2PositionY <= gridSizeY) {
                 bat2PositionY = bat2PositionY + batSpeedY * deltaTime;
             }
         }
