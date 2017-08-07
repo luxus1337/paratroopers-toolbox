@@ -47,7 +47,7 @@
     var ballPositionX = Math.round(gridSizeX * .5);
     var ballPositionY = Math.round(gridSizeY * .5);
     
-    var batSpeedY = 1;
+    var batSpeedY = 10;
     var batSizeX = 1;
     var batSizeY = 5;
     var batColor = "#FFFFFF";
