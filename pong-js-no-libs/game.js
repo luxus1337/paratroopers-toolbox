@@ -1,17 +1,24 @@
-/**Sorry loekoe maar ik denk dat ik het helemaal verK heb. Screen is white zodra ik het spel laad. 
- * Ik heb mijn gedachte gang bij elk stuk code gezet, heb veel op internet gezocht maar kom dan hele andere dingen tegen dan dat ik daadwerkelijk wil/zoek.
- * Ik merk dat deze opdracht voor mij "moeilijk" is en weet ook niet of dat een slecht teken is. De dingen die ik in codecademy heb gezien en gedaan is compleet anders dan dit.
- * Hopelijk heb je een mooie vakantie gehad man, ik heb uren lopen kloten met deze game whahaha. Echt nachtmerries krijg ik ervan. 
+/**  Updated on 07-08-2017 and talked with lead develloper.
  * 
- * Summary:
- * - Omdat ik het lastig vind graag uitleg op elke TODO: Maar geef aub de correcte code niet want ik wil het zelf oplossen.
- * - De boundary collisions vind ik lastig (goede uitleg nodig), zat zelf te denken om de keyboard event uit te schakelen als die bij de X as is. 
- * - Ball boundary uitleg.
+ * Summary of the conversation:
+ * - Keep it simple and only do the @TODO listings.
+ * - Updated the boundary collisions.
+ * - Mode some changes in movement speeds
+ * - Eventually in time we can make it more difficult and add in some more options.
  * 
- * http://blog.mailson.org/2013/02/simple-pong-game-using-html5-and-canvas/ Kijk deze pong ik snap wel redelijk hoe het werk allemaal. Maar om het zelf te typen is hele andere koek.
+ * ALL THE @TODO's are done with the collisions, in a simple way. Now it is time to move on to next task?
  * 
+ * Whenever the @TODO's are done i would like to know how to add score. My idea is to have a (home page) basically clickable text (so i guess in the HTML page)
+ * The idea is to have 3 options:
+ * - Instructions (Controls and different game modes explained, (keep it simple))
+ * - PVP MODE (just 1v1, first at 5 points wins)
+ * - COOP MODE (Both build up same score longer game goes on)
+ * - EXTREME MODE (Every 5 seconds another ball will come in the game).
  * 
- */ 
+ * ENDGAME DEVELOPPING SKILLS:
+ * - Give both the players a different color, after 10 ball hits give them their color ball. (Need to work out this idea more but this will follow.)
+
+*/
 
 
 
@@ -42,8 +49,8 @@ const backgroundColor = "#000000";
  */
 
 //speed is in units per second, a unit is a square on the playfield
-var ballSpeedX = -3;
-var ballSpeedY = .25;
+var ballSpeedX = 5;
+var ballSpeedY = 2;
 var ballSizeX = 1;
 var ballSizeY = 1;
 var ballColor = "#FFFFFF";
@@ -55,14 +62,14 @@ var batSizeX = 1;
 var batSizeY = 5;
 var batColor = "#FFFFFF";
 
-var bat1PositionX = 3;
+var bat1PositionX = 1;
 var bat1PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
 var bat1movingUp = false
 var bat1movingDown = false;
 var bat2movingUp = false;
 var bat2movingDown = false;
 
-var bat2PositionX = gridSizeX - 3;
+var bat2PositionX = gridSizeX - 1;
 var bat2PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
 
 /**
@@ -133,7 +140,7 @@ function update() {
             roundedBallPositionY < bat1PositionY + batSizeY
         ) {
             //ball collided with player what do?
-            ballSpeedX = ballSpeedX * -3;
+            ballSpeedX = ballSpeedX * -1.1;
         }
     }
 
@@ -142,31 +149,36 @@ function update() {
             if( roundedBallPositionY >= bat2PositionY &&
                 roundedBallPositionY < bat2PositionY +batSizeY
             ) {
-                ballSpeedX = ballSizeX *-3;
+                ballSpeedX = ballSpeedX *-1.1;
             }
     
         }
 
     //@TODO: check the ball for boundary colission
     // De ball hoeft alleen te weerkaatsen op de X as. Als die op de Y as zit heeft de player hem niet kunnen raken, aldus gewonnen.
-        if (ballPositionX  === gridSizeX) {
-             if(roundedBallPositionY === gridSizeX)     
-
-               { 
-                   ballSpeedX = ballSizeX *-3;
-               }
+ 
+    //Checks ball right side.
+        if (roundedBallPositionX >= gridSizeX) { 
+            console.log("Ball out of bounds, start again");
         }
         
-        
-    // Ball goes behind player and basically scoars a point. Kan me niet voorstellen dat het zo hoort maar kan me niks anders bedenken :$
-        if (ballPositionX && ballPositionY === gridSizeY) {
-            console.log("You score a point, congratulations!");
+    //Checks Left side
+        if (roundedBallPositionX < 0) {
+            console.log("Ball out of bounds, start again");
         }
 
-
-    //@TODO Check Bat1 & bat2 collision with boundary, lijkt mij meest logische om de keyboard event uit te zetten zodra je de X as hebt berijkt?
-    // Ik heb geen idee of het zo moet hoor
-     
+    //Checks Top side, so a collision with boundary what has to result in a bounce.
+        if (roundedBallPositionY < 0) {
+            ballSpeedX *= -1.1;
+        }
+    //Checks Bot side, same as topside, collision with boundary.
+        if (roundedBallPositionY >= gridSizeY) {
+            ballSpeedX *= 1.1;
+        }
+    }
+        
+}
+  
 
 
     //@TODO: listen for player 1 input
@@ -180,13 +192,13 @@ function update() {
     if(bat2movingUp) {
         bat2PositionY = bat2PositionY - batSpeedY * deltaTime;
     } else if (bat2movingDown) {
-        bat2PositionY = bat2PositionY + batSpeedY * deltatime;
+        bat2PositionY = bat2PositionY + batSpeedY * deltaTime;
     }
     
 
     drawGame();
     window.requestAnimationFrame(update);
-}
+
 
 window.requestAnimationFrame(update);
 /**
@@ -221,7 +233,9 @@ document.addEventListener('keyup', function(e){
  * /INPUT
  */
 
- //DE GAME STOPT ERMEE ALS JE DE "2" INKLIKT. GEEN IDEE WAAROM. DE "8" DOET HET WEL
+// I would like to know how to put in the Arrow keys (This must be done in a different way.) 
+
+ 
 document.addEventListener('keydown', function(e){
     switch(e.key) {
         case "8":
