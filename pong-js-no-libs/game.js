@@ -18,24 +18,24 @@
 //game variables
 {
     //speed is in units per second, a unit is a square on the playfield
-    var ballSpeedX = -3;
-    var ballSpeedY = .25;
+    var ballSpeedX = 5;
+    var ballSpeedY = 3;
     var ballSizeX = 1;
     var ballSizeY = 1;
     var ballColor = "#FFFFFF";
     var ballPositionX = Math.round(gridSizeX * .5);
     var ballPositionY = Math.round(gridSizeY * .5);
 
-    var batSpeedY = 1;
+    var batSpeedY = 10;
     var batSizeX = 1;
     var batSizeY = 5;
     var batColor = "#FFFFFF";
-    var bat1PositionX = 3;
+    var bat1PositionX = 2;
     var bat1PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
     var bat1movingUp = false
     var bat1movingDown = false;
 
-    var bat2PositionX = gridSizeX - 3;
+    var bat2PositionX = gridSizeX - 2;
     var bat2PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
 }
 
