@@ -166,16 +166,6 @@ function update() {
 
     //@TODO Check Bat1 & bat2 collision with boundary, lijkt mij meest logische om de keyboard event uit te zetten zodra je de X as hebt berijkt?
     // Ik heb geen idee of het zo moet hoor
-        var cancelKeypress = true;
-        cancelKeypress = e.key;
-            document.addEventListener = "keydown", "keyup", function(e){
-                if (gridSizeX === bat1PositionY && gridSizeX === bat2PositionY) {
-                 return true;
-                }
-            }
-
- 
-
      
 
 
