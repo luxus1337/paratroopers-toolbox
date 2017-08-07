@@ -62,7 +62,7 @@ var batSizeX = 1;
 var batSizeY = 5;
 var batColor = "#FFFFFF";
 
-var bat1PositionX = 1;
+var bat1PositionX = 0.1;
 var bat1PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
 var bat1movingUp = false
 var bat1movingDown = false;
@@ -177,7 +177,7 @@ function update() {
         }
     }
         
-}
+
   
 
 
@@ -189,12 +189,25 @@ function update() {
        bat1PositionY = bat1PositionY + batSpeedY * deltaTime; 
     }
 
+    //Boundary collision bat1 with wall
+       if(bat1movingUp && bat1PositionY > 0) {
+        bat1PositionY = bat1PositionY - batSpeedY * deltaTime;
+    } else if (bat1movingDown && bat1PositionY >= gridSizeY) {
+       bat1PositionY = bat1PositionY + batSpeedY * deltaTime; 
+    }
+
     if(bat2movingUp) {
         bat2PositionY = bat2PositionY - batSpeedY * deltaTime;
     } else if (bat2movingDown) {
         bat2PositionY = bat2PositionY + batSpeedY * deltaTime;
     }
     
+    //Boundary collision bat2 with wall
+    if(bat2movingUp && bat2PositionY > 0) {
+        bat2PositionY = bat2PositionY - batSpeedY * deltaTime;
+    } else if (bat2movingDown && bat2PositionY >= gridSizeY) {
+        bat2PositionY = bat2PositionY + batSpeedY * deltaTime;
+    }
 
     drawGame();
     window.requestAnimationFrame(update);
