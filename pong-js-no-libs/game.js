@@ -85,6 +85,10 @@ Score has been implemented, only problem is i can't figure out why it's not work
     var bat2PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
     var bat2movingUp = false
     var bat2movingDown = false;
+
+    //Score
+    var score1 = 0;
+    var score2 = 0;
 }
 
 //render functions
@@ -114,6 +118,10 @@ Score has been implemented, only problem is i can't figure out why it's not work
         
         //draw ball
         drawRectangle(ballPositionX, ballPositionY, ballSizeX, ballSizeY, ballColor);
+
+        /* Draw new Ball
+        drawRectangle(newballPositionX, newballPositionY, newballSizeX, newballSizeY, newballColor)
+        */
     }
 }
 
@@ -189,7 +197,14 @@ Score has been implemented, only problem is i can't figure out why it's not work
                 console.log("Ball out of bounds, start again");
                 score1Display.innerHTML = score1;
                 score1++;
-                roundedBallPositionX + roundedBallPositionY;
+                // Or does this code go here? ballPositionX + ballPositionY; I can't figure out to reposition ball back to middle.
+                
+            }
+
+
+            //Question for lead develloper how to get the ball back to middle once a point is made, i've got the code working but now my hickup is how to restart ball in middle with point still vieuwable.
+            if (score1++) {
+                ballPositionX + ballPositionY;
             }
             
             //Check Left side
