@@ -28,6 +28,29 @@ Score has been implemented, only problem is i can't figure out why it's not work
 
 //config
 {
+
+    /** Make our dropdown button function (next thing to do is remove the dropdown menu when something is clicked)
+     * I want to make for all the Href options a different functioning game as explained in the text above.
+     * I don't know if i have to remake the same code etc. I would be nice if we could do this in a friday evening with both a big joint in our hand my friend.
+     * Also was thinking that the Ahref option isn't correct but i like the way it looks and funtions, i don't know how to make such a thing for a truely working game, this is me freestyling and 
+     * learning from you. Haha let me know what you think with your masterfull brain.
+     * 
+     * Ahref = point out to other website right? My idea is to change that code into the correct one (which i don't know ATM) and each game mode has a different code to follow right? 
+     * So my big brainkiller is ... with the different game mode options should i then write 3 different working games or can i make changes within this "Main" code?
+     * 
+     *  Make the dropdown menu work! (would be amazing whenever clicked on it will be removed.) 
+     * Whenever i made the gamebar (hidden upon click function) i will position it to middle of screen.
+     *  
+     */ 
+
+
+
+     
+     
+
+
+    
+
     //get our drawwable canvas
     var canvasEl = document.getElementById('canvas');
     var context = canvasEl.getContext('2d');
@@ -45,19 +68,52 @@ Score has been implemented, only problem is i can't figure out why it's not work
     //get a reference to the html score element for both player 1 and 2
     var score1Display = document.getElementById('score1-display');
     var score2Display = document.getElementById('score2-display');
+    //get a reference to the html score element for option COOP mode
+    var cscoreDisplay = document.getElementById("cscore-display");
+
+    // Make the dropdown button function (Best would be if when clicked on it will be hidden)
+
+    function dropFunction() {
+    document.getElementById("dropdown").classList.toggle("show");
+    }
+
+ 
+    // Close the dropdown menu if the user clicks outside of it. So once clicked on the button and then (misclicks on other dropdown options the dropdown will dissapear!)
+    window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
 
 }
 
     //game variables
 {
     //speed is in units per second, a unit is a square on the playfield
-    var ballSpeedX = -5;
-    var ballSpeedY = 3;
+    var ballSpeedX = 10;
+    var ballSpeedY = -5;
+    
+    // Numbers needed to make a random ballSpeed whenever a point is scored
+    var maxBallSpeedX = 10;
+    var minBallSpeedX = -10;
+    var maxBallSpeedY = 6; 
+    var minBallSpeedY = -6;
+
     var ballSizeX = 1;
     var ballSizeY = 1;
     var ballColor = "#FFFFFF";
     var ballPositionX = Math.round(gridSizeX * .5);
     var ballPositionY = Math.round(gridSizeY * .5);
+    var startBallPositionX = ballPositionX;
+    var startBallPositionY = ballPositionY;
 
     /**Testing some code to see if i can add in a new ball 
     var newballSpeedX = -5;
@@ -89,6 +145,9 @@ Score has been implemented, only problem is i can't figure out why it's not work
     //Score
     var score1 = 0;
     var score2 = 0;
+    var coopscore = 0;
+
+    
 }
 
 //render functions
@@ -135,11 +194,16 @@ Score has been implemented, only problem is i can't figure out why it's not work
     
     //update is called every frame
     function update() {
-        
+       
         //calculate the time difference (deltaTime) with last frame
         now = performance.now();
         deltaTime = (now - lastTime) * .001;
         lastTime = now;
+        cscoreDisplay.innerHTML = coopscore;
+        coopscore ++;
+        
+        
+        
         
         //move ball
         ballPositionX = ballPositionX + ballSpeedX * deltaTime;
@@ -194,34 +258,56 @@ Score has been implemented, only problem is i can't figure out why it's not work
         {
             //Check ball right side.
             if (roundedBallPositionX >= gridSizeX) { 
-                console.log("Ball out of bounds, start again");
-                score1Display.innerHTML = score1;
-                score1++;
-                // Or does this code go here? ballPositionX + ballPositionY; I can't figure out to reposition ball back to middle.
                 
+                score1++;
+                coopscore = 0;
+                batSpeedY = 10;
+                score1Display.innerHTML = score1;
+                ballPositionX = startBallPositionX;
+                ballPositionY = startBallPositionY;
+                ballSpeedX = Math.round( (Math.random() - 0.5) * 2 *  ( maxBallSpeedX - minBallSpeedX )) + maxBallSpeedX*.5; // generate a random ballSpeedX
+                if (ballSpeedX === 3) {
+                    ballSpeedX =  maxBallSpeedX;
+                }
+                
+
+                ballSpeedY = Math.round( (Math.random() - 0.5) * 2 *  ( maxBallSpeedY - minBallSpeedY )) + maxBallSpeedY*.5; // generate a random ballSpeedY
+                if (ballSpeedY === 0) {
+                    ballSpeedY = maxBallSpeedY;
+                }
+               
             }
 
 
-            //Question for lead develloper how to get the ball back to middle once a point is made, i've got the code working but now my hickup is how to restart ball in middle with point still vieuwable.
-            if (score1++) {
-                ballPositionX + ballPositionY;
-            }
             
             //Check Left side
             if (roundedBallPositionX < 0) {
-                console.log("Ball out of bounds, start again");
-                score2Display.innerHTML = score2;
+                
                 score2++;
-                roundedBallPositionX + roundedBallPositionY;
+                coopscore = 0;
+                batSpeedY = 10;
+                score2Display.innerHTML = score2;
+                ballPositionX = startBallPositionX;
+                ballPositionY = startBallPositionY;
+                ballSpeedX = Math.round( (Math.random() - 0.5) * 2 *  ( maxBallSpeedX - minBallSpeedX )) + minBallSpeedX; // generate a random ballSpeedX  
+                if (ballSpeedX === 0) {
+                    ballSpeedX = maxBallSpeedX;
+                }
+                ballSpeedY = Math.round( (Math.random() - 0.5) * 2 *  ( maxBallSpeedY - minBallSpeedY )) + minBallSpeedY; // generate a random ballSpeedY
+               if (ballSizeY === 0) {
+                   ballSpeedY = minBallSpeedY;
+               }
             }
+
+           
             
             //Check Top side, so a collision with boundary what has to result in a bounce.
             if (roundedBallPositionY < 0) {
-                ballSpeedY *= -1;
+                ballSpeedY *= -1.01;
             }
             //Check Bot side, same as topside, collision with boundary.
             if (roundedBallPositionY >= gridSizeY) {
-                ballSpeedY *= -1;
+                ballSpeedY *= -1.01;
             }
         }
         

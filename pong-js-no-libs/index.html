@@ -12,7 +12,7 @@
             
         }
 
-        /* CSS code to style the score options + positioning  */
+        /* Styling for everything else, think of the dropdown menu and scores!  */
         
         .score {
         position: absolute;
@@ -31,6 +31,65 @@
         text-align: right;
         }
 
+        .coopscore {
+        position: absolute;
+        font-size: 20px;
+        color: white;
+        font-size: 40px;
+        font-family: 'Comis Sans', sans-serif;
+        top: 20px;
+        left: 50%;
+        }
+
+
+        /* Dropdown Button */
+        .dropbtn {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            font-size: 50px;
+            border: 1px solid white;
+            font-family: 'Comis Sans', sans-serif;
+            
+        }
+
+       
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: black;
+        }
+
+      
+        .dropdown {
+            float: right;
+        }
+
+        
+        .dropdown-content {
+            display: none;
+            right: 0;
+            background-color: black;
+            z-index: 1;
+        }
+
+       
+        .dropdown-content a {
+            color: white;
+            font-size: 25px;
+            padding: 20;
+            text-decoration: none;
+            display: block;
+            font-family: 'Comis Sans', sans-serif;
+        }
+
+
+        
+        .show {display:block;}
+       
+       /* END OF ALL THE CSS STYLING */
+
+
+        
+
         canvas {
             image-rendering: optimizeSpeed;             /* Older versions of FF          */
             image-rendering: -moz-crisp-edges;          /* FF 6.0+                       */
@@ -44,7 +103,21 @@
     <body>
         <canvas id="canvas" width="41" height="31" id="game"></canvas>
         <script defer src="game.js"></script>
+
+         <!--Content for the main screen with clickable options, i want to know how to lead the game after someone clicks on an option -->
+       <div class="dropdown">
+        <button onclick="dropFunction()" class="dropbtn">Choose your game mode!</button>
+            <div id="dropdown" class="dropdown-content">
+                <a href="#">PVP MODE</a>
+                <a href="#">COOP MODE</a>
+                <a href="#">EXTREME MODE</a>
+            </div>
+        </div>
+
+
         <div id="score1-display" class="score left">0</div>
         <div id="score2-display" class="score right">0</div>
+        <div id="cscore-display" class="coopscore"> 0</div>
+       
     </body>
 </html>
