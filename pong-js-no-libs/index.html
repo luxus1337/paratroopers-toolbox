@@ -1,123 +1,118 @@
 <html>
     <head>
         <title>STAGEPONG</title>
-    <style>
-        /* Style for the entire canvas */
-        html, body, canvas {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            min-height: 100%;
+        <style>
+            /* Style for the entire canvas */
+            html, body, canvas {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+                min-height: 100%;
+            }
+
+            /* Styling for everything else, think of the dropdown menu and scores!  */
+            .score {
+                position: absolute;
+                top: 20px;
+                font-size: 40px;
+                color: white;
+                font-family: 'Comis Sans', sans-serif;
+            }
+
+            .score.left {
+                left: 20px;
+            }
+
+            .score.right {
+                right: 20px;
+                text-align: right;
+            }
+
+            .coopscore {
+                position: absolute;
+                font-size: 20px;
+                color: white;
+                font-size: 40px;
+                font-family: 'Comis Sans', sans-serif;
+                top: 20px;
+                left: 50%;
+                width: 200px;
+                margin-left: -100px;
+                text-align: center;
+            }
+
+            /* CSS FOR THE GAME MODES*/
+            .COOP .score.left, 
+            .COOP .score.right {
+                display: none;
+            }
+
+            .PVP .coopscore {
+                display: none;
+            }
+
+            .PVP .start-ui,
+            .COOP .start-ui {
+                display: none;
+            }
             
-        }
+            canvas {
+                image-rendering: optimizeSpeed;             /* Older versions of FF          */
+                image-rendering: -moz-crisp-edges;          /* FF 6.0+                       */
+                image-rendering: -webkit-optimize-contrast; /* Safari                        */
+                image-rendering: -o-crisp-edges;            /* OS X & Windows Opera (12.02+) */
+                image-rendering: pixelated;                 /* Awesome future-browsers       */
+                -ms-interpolation-mode: nearest-neighbor;   /* IE                            */
+            }
 
-        /* Styling for everything else, think of the dropdown menu and scores!  */
-        
-        .score {
-        position: absolute;
-        top: 20px;
-        font-size: 40px;
-        color: white;
-        font-family: 'Comis Sans', sans-serif;
-        }
+            .ui {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                padding-top: 25%;
+                font-size: 20px;
+            }
 
-        .score.left {
-        left: 20px;
-        }
-
-        .score.right {
-        right: 20px;
-        text-align: right;
-        }
-
-        .coopscore {
-        position: absolute;
-        font-size: 20px;
-        color: white;
-        font-size: 40px;
-        font-family: 'Comis Sans', sans-serif;
-        top: 20px;
-        left: 50%;
-        }
-
-
-        /* Dropdown Button */
-        .dropbtn {
-            background-color: black;
-            color: white;
-            padding: 20px;
-            font-size: 50px;
-            border: 1px solid white;
-            font-family: 'Comis Sans', sans-serif;
-            
-        }
-
-       
-        .dropbtn:hover, .dropbtn:focus {
-            background-color: black;
-        }
-
-      
-        .dropdown {
-            float: right;
-        }
-
-        
-        .dropdown-content {
-            display: none;
-            right: 0;
-            background-color: black;
-            z-index: 1;
-        }
-
-       
-        .dropdown-content a {
-            color: white;
-            font-size: 25px;
-            padding: 20;
-            text-decoration: none;
-            display: block;
-            font-family: 'Comis Sans', sans-serif;
-        }
-
-
-        
-        .show {display:block;}
-       
-       /* END OF ALL THE CSS STYLING */
-
-
-        
-
-        canvas {
-            image-rendering: optimizeSpeed;             /* Older versions of FF          */
-            image-rendering: -moz-crisp-edges;          /* FF 6.0+                       */
-            image-rendering: -webkit-optimize-contrast; /* Safari                        */
-            image-rendering: -o-crisp-edges;            /* OS X & Windows Opera (12.02+) */
-            image-rendering: pixelated;                 /* Awesome future-browsers       */
-            -ms-interpolation-mode: nearest-neighbor;   /* IE                            */
-        }
-    </style>
+            button,
+            select {
+                font-size: inherit;
+                padding: 0 10px;
+                display: block;
+                line-height: 50px;
+                height: 50px;
+                width: 200px;
+                text-align: center;
+                margin: 20px auto;
+            }
+        </style>
     </head>
     <body>
         <canvas id="canvas" width="41" height="31" id="game"></canvas>
-        <script defer src="game.js"></script>
+        <div class="ui">
+                
+            <div id="score1-display" class="score left">0</div>
+            <div id="score2-display" class="score right">0</div>
+            <div id="cscore-display" class="coopscore">0</div>
+            
+            <div class="start-ui">
 
-         <!--Content for the main screen with clickable options, i want to know how to lead the game after someone clicks on an option -->
-       <div class="dropdown">
-        <button onclick="dropFunction()" class="dropbtn">Choose your game mode!</button>
-            <div id="dropdown" class="dropdown-content">
-                <a href="#">PVP MODE</a>
-                <a href="#">COOP MODE</a>
-                <a href="#">EXTREME MODE</a>
+                <select id="mode-select"> CHOOSE YOUR GAME MODE!
+                    <option value="PVP">PvP</option>
+                    <option value="COOP">Coop</option>
+                </select>
+
+                <button id="start-button" type="button">START GAME</button>
+
             </div>
+        
         </div>
-
-
-        <div id="score1-display" class="score left">0</div>
-        <div id="score2-display" class="score right">0</div>
-        <div id="cscore-display" class="coopscore"> 0</div>
-       
+        <script src="ball.js"></script>
+        <script src="bat.js"></script>
+        <script src="score-display.js"></script>
+        <script src="game.js"></script>
     </body>
 </html>
