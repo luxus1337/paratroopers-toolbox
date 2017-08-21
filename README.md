@@ -1,7 +1,7 @@
 # paratroopers-toolbox
 Hello Paratrooper!
 
-If you are just starting out with no javascript, html or css experience. I would recommend to follow the Javascript, HTML and CSS courses on "The code Academy" (https://www.codecademy.com/).
+If you are just starting out with no javascript, html or css experience. I would recommend to follow the Javascript, HTML and CSS courses on "The code Academy" (https://www.codecademy.com/). After these courses you can continue from here.
 
 First you will need to install the following programs:
 * A terminal (on windows I would recommend cmder, http://cmder.net/)
@@ -17,7 +17,7 @@ You will also need a working github key to propperly clone the repository, read 
 
 Now lets create our first game please check out this repostiory by running the following command in CMDer (or your terminal of choice) in a folder where you want your paratroopers' projects to be (in the example this is ~/_paratroopers/):
 
-> __Protip__: "~" stands for your home directory
+> __Protip__: "~" stands for your home directory (i.e. "C:\Users\Luxus")
 
 
 To create a folder u can use "mkdir"
