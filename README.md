@@ -4,7 +4,9 @@ Hello Paratrooper!
 First you will need to install the following programs:
 * A terminal (on windows I would recommend cmder, http://cmder.net/)
 * VS Code (https://code.visualstudio.com/)
-* A browser Firefox (https://www.mozilla.org/en-US/firefox/new/), Chrome (https://www.google.com/chrome/index.html)
+* A browser:
+  * Firefox (https://www.mozilla.org/en-US/firefox/new/)
+  * Chrome (https://www.google.com/chrome/index.html)
 * Node (https://nodejs.org/en/)
 
 You will also need a working github key to propperly clone the repository, read more about it:
