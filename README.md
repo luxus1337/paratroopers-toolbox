@@ -1,6 +1,8 @@
 # paratroopers-toolbox
 Hello Paratrooper!
 
+If you are just starting out with no javascript, html or css experience. I would recommend to follow the Javascript, HTML and CSS courses on "The code Academy" (https://www.codecademy.com/).
+
 First you will need to install the following programs:
 * A terminal (on windows I would recommend cmder, http://cmder.net/)
 * VS Code (https://code.visualstudio.com/)
