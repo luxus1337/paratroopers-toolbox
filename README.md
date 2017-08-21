@@ -15,12 +15,12 @@ You will also need a working github key to propperly clone the repository, read 
 * Generating a key (https://help.github.com/enterprise/2.10/user/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
 * Adding the key to github (https://github.com/settings/keys)
 
-Now lets create our first game please check out this repostiory by running the following command in CMDer (or your terminal of choice) in a folder where you want your paratroopers' projects to be (in the example this is ~/_paratroopers/):
+Now lets create our first projetct please check out this repostiory by running the following command in CMDer (or your terminal of choice) in a folder where you want your paratroopers' projects to be (in the example I used ~/_paratroopers/):
 
 > __Protip__: "~" stands for your home directory (i.e. "C:\Users\Luxus")
 
 
-To create a folder u can use "mkdir"
+To create a folder in the terminal you can use "mkdir"
 ```
 mkdir _paratroopers
 ```
