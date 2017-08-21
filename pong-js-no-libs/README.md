@@ -8,7 +8,7 @@ That's why branches where invented (read more about them here: https://git-scm.c
 ```
 git checkout -b feature/ResolvingToDosBy{PersonalTagHere}
 ```
-After doing some changes and saving those files. You want to commit this changes to the git history (in your currenr branch). To see the currenst status use the following command:
+After doing some changes and saving those files. You want to commit this changes to the git history (in your current branch). To see the currenst status use the following command:
 ```
 git status
 ```
@@ -16,6 +16,8 @@ Here you see files marked as modified if you want to add these do so by issueing
 ```
 # to add only the game.js file
 git add game.js
+# to add all changes files
+git add .
 ```
 If you wanted to reset the changes you made in files:
 ```
