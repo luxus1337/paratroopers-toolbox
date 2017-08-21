@@ -4,7 +4,7 @@ You can see the game running in action if you open the index.html file in your b
 
 Get yourself familiar with the code in game.js to see what the game code currently has. There are "@TODO's" marked in the code. These should be solved to get a fully functioning pong. However this project should stay clean of your changes until your work is completed, but you do want to save your changes in the repository!
 
-That's why branches where invented (read more about them here: https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell). To create your own branch (your own private space to work in) use the following command:
+That's why branches where invented (read more about them here: https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell). To create your own branch use the following command:
 ```
 git checkout -b feature/ResolvingToDosBy{PersonalTagHere}
 ```
