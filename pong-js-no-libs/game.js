@@ -198,8 +198,7 @@ function initialize() {
         now = performance.now();
         deltaTime = (now - lastTime) * .001;
         lastTime = now;
-        coopscore.score++; // dit ook naar switch coop mode
-        coopscore.updateScore(); // dit moet dus naar de switch COOP mode
+         // dit moet dus naar de switch COOP mode
 
         //for colission checking we will use a rounded ball position so we can check if a ball is matching an exact round number
         var roundedBallPositionX = Math.round(ballPositionX);
