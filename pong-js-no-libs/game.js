@@ -11,34 +11,20 @@ var canvasEl,
     cscoreDisplay,
     modeSelect,
     mode,
-    ballSpeedX,
-    ballSpeedY,
-    maxBallSpeedX,
-    minBallSpeedX,
-    maxBallSpeedY,
-    minBallSpeedY,
-    ballSizeX,
-    ballSizeY,
-    ballColor,
-    ballPositionX,
-    ballPositionY,
-    startBallPositionX,
-    startBallPositionY,
     batSpeedY,
     batSizeX,
     batSizeY,
     batColor,
-    bat1PositionX,
-    bat1PositionY,
+    bat1,
+    bat2,
     bat1movingUp,
     bat1movingDown,
-    bat2PositionX,
-    bat2PositionY,
     bat2movingUp,
     bat2movingDown,
     score1,
     score2,
-    coopscore;
+    coopscore,
+    ball;
 
 /*
     //@TODO1:
@@ -52,7 +38,7 @@ var canvasEl,
     //To set a variable of ball do it like so:
     ball.position.x = 1;
 
-    //Implement this method of working by removing variables above this green text, and resolving the undefined variables like bat1PositionX by using bat1.position.x;
+    //Implement this method of working by removing variables above this green text, and resolving the undefined variables like bat1.position.x by using bat1.position.x;
 */
 
 function setConfig() {
@@ -89,40 +75,11 @@ function setGameplayValues() {
     //@TODO: Implement the new Ball(), .. etc. logic
 
     //speed is in units per second, a unit is a square on the playfield
-    ballSpeedX = 10;
-    ballSpeedY = -5;
+    ball = new Ball();
     
-    // Numbers needed to make a random ballSpeed whenever a point is scored
-    maxBallSpeedX = 12;
-    minBallSpeedX = 6;
-    maxBallSpeedY = 10;
-    minBallSpeedY = 5;
-
-    ballSizeX = 1;
-    ballSizeY = 1;
-    ballColor = "#FFFFFF";
-    ballPositionX = Math.round(gridSizeX * .5);
-    ballPositionY = Math.round(gridSizeY * .5);
-    startBallPositionX = ballPositionX;
-    startBallPositionY = ballPositionY;
-
-    batSpeedY = 10;
-    batSizeX = 1;
-    batSizeY = 5;
-    batColor = "#FFFFFF";
-
-    //bat Player 1
-    bat1PositionX = 1;
-    bat1PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
-    bat1movingUp = false
-    bat1movingDown = false;
-    
-    //bat Player 2
-    bat2PositionX = gridSizeX - 2;
-    bat2PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
-    bat2movingUp = false
-    bat2movingDown = false;
-
+  
+    resetBall();
+    resetBats(); 
 }
 
 function initialize() {
@@ -156,13 +113,13 @@ function initialize() {
         drawRectangle(0,0,width,height, backgroundColor);
         
         //draw player 1
-        drawRectangle(bat1PositionX, bat1PositionY, batSizeX, batSizeY, batColor);
+        drawRectangle(bat1.position.x, bat1.position.y, bat1.size.x, bat1.size.y, bat1.color);
         
         //draw player 2
-        drawRectangle(bat2PositionX, bat2PositionY, batSizeX, batSizeY, batColor);
+        drawRectangle(bat2.position.x, bat2.position.y, bat2.size.x, bat2.size.y, bat2.color);
         
         //draw ball
-        drawRectangle(ballPositionX, ballPositionY, ballSizeX, ballSizeY, ballColor);
+        drawRectangle(ball.position.x, ball.position.y, ball.size.x, ball.size.y, ball.color);
     }
 }
 
@@ -173,12 +130,56 @@ function initialize() {
     var now = performance.now();
     
     function resetBallAndPlayerSpeed() {
-        batSpeedY = 10;
-        ballPositionX = startBallPositionX;
-        ballPositionY = startBallPositionY;
+         resetBats();
+         resetBall();
         var directionModifier = Math.random() > .5 ? 1 : -1;
-        ballSpeedX = ( Math.round( Math.random() * ( maxBallSpeedX - minBallSpeedX )) + minBallSpeedX ) * directionModifier; // generate a random ballSpeedX  
-        ballSpeedY = ( Math.round( Math.random() * ( maxBallSpeedY - minBallSpeedY )) + minBallSpeedY ) * directionModifier; // generate a random ballSpeedY
+        ball.speed.x = ( Math.round( Math.random() * ( ball.maxballspeed.x - ball.minballspeed.x )) + ball.minballspeed.x ) * directionModifier; // generate a random ballSpeedX  
+        ball.speed.y = ( Math.round( Math.random() * ( ball.maxballspeed.y - ball.minballspeed.y )) + ball.minballspeed.y ) * directionModifier; // generate a random ballSpeedY
+    }
+
+    function resetBats(){
+        //bat Player 1
+        bat1 = new Bat();
+        bat1.position.x = 1;
+        bat1.position.y = Math.round((gridSizeY - bat1.size.y * .5) * .5);
+        console.log(bat1);
+        bat1.movingUp = false
+        bat1.movingDown = false;
+        bat1.speed.y = 10;
+        bat1.size.x = 1;
+        bat1.size.y = 5;
+        bat1.color = "#FFFFFF";
+        
+        //bat Player 2
+        bat2 = new Bat();
+        bat2.position.x = gridSizeX - 2;
+        bat2.position.y = Math.round((gridSizeY - bat2.size.y * .5) * .5);
+        bat2.movingUp = false
+        bat2.movingDown = false;
+        bat2.speed.y = 10;
+        bat2.size.x = 1;
+        bat2.size.y = 5;
+        bat2.color = "#FFFFFF";
+
+    }
+
+    function resetBall(){
+        ball.speed.x = 10;
+        ball.speed.y = -5;
+        // Numbers needed to make a random ballSpeed whenever a point is scored
+        ball.maxballspeed.x = 12;
+        ball.minballspeed.x = 6;
+        ball.minballspeed.y = 10;
+        ball.minballspeed.y = 5;
+    
+        ball.size.x = 1;
+        ball.size.y = 1;
+        ball.color = "#FFFFFF";
+        ball.position.x = Math.round(gridSizeX * .5);
+        ball.position.y = Math.round(gridSizeY * .5);
+        ball.startPosition.x = ball.position.x;
+        ball.startPosition.y = ball.position.y;
+    
     }
 
     function bounceBallWithPlayer() {
@@ -187,8 +188,8 @@ function initialize() {
         // so for example hitting a bit low would increase it's y value, but hitting it dead center
         // might make it go slower on the y...
 
-        ballSpeedX = ballSpeedX * -1.1;
-        batSpeedY = batSpeedY * 1.05; //added in batSpeed each time ball hits the bat.
+        ball.speed.x = ball.speed.x * -1.1;
+        bat.speed.y = bat.speed.y * 1.05; //added in batSpeed each time ball hits the bat.
     }
 
     //update is called every frame
@@ -198,11 +199,33 @@ function initialize() {
         now = performance.now();
         deltaTime = (now - lastTime) * .001;
         lastTime = now;
-         // dit moet dus naar de switch COOP mode
-
         //for colission checking we will use a rounded ball position so we can check if a ball is matching an exact round number
-        var roundedBallPositionX = Math.round(ballPositionX);
-        var roundedBallPositionY = Math.round(ballPositionY);
+        var roundedBallPositionX = Math.round(ball.position.x);
+        var roundedBallPositionY = Math.round(ball.position.y);
+
+        function bounceBallWithPlayer(){
+            //check for ball colission with player 1
+            if(roundedBallPositionX === bat1.position.x) { //check if the ballposition is the same as the players x position
+            if(
+                    roundedBallPositionY >= bat1.position.y && //the rounded ballPosition is greater or equal to the position of the bat
+                    roundedBallPositionY < bat1.position.y + batSizeY //the roudned ballPosition is smaller than the batPosition plus its size
+                    //if both statements are true we are connecting vertically with the bat
+                    ) {
+                        //fix ball position
+                        ball.position.x = bat1.position.x + 1;
+                    }
+                }
+                
+                //check for ball colission with player 2
+                if (roundedBallPositionX === bat2.position.x) {
+                    if( roundedBallPositionY >= bat2.position.y &&
+                    roundedBallPositionY < bat2.position.y +batSizeY
+                    ) {
+                        //fix ball position
+                        ball.position.x = bat2.position.x - 1;
+                    }
+                }
+            }
         
         switch(mode) {
             case "PVP":
@@ -220,33 +243,46 @@ function initialize() {
                     resetBallAndPlayerSpeed();
                 }
 
+                //check top side
+                if (roundedBallPositionY < 0) {
+                    ball.speed.y *= -1.01;
+                }
+
+                //Check Bot side, same as topside, collision with boundary.
+                if (roundedBallPositionY >= gridSizeY) {
+                    ball.speed.y *= -1.01;
+                }
+
+                //CHECK THE PLAYER COLLISION
+                bounceBallWithPlayer();
+                
+
             break;
             case "Coop":
 
                 //Check ball right side.
                 if (roundedBallPositionX >= gridSizeX) { 
                     coopScore.score = 0;
-                    batSpeedY = 10;
-                    ballPositionX = startBallPositionX;
-                    ballPositionY = startBallPositionY;
-                    ballSpeedX = Math.round( (Math.random() - 0.5) * 2 *  ( maxBallSpeedX - minBallSpeedX )) + maxBallSpeedX*.5; // generate a random ballSpeedX
-                    if (ballSpeedX === 3) {
-                        ballSpeedX =  maxBallSpeedX;
-                    }
-                    
-    
-                    ballSpeedY = Math.round( (Math.random() - 0.5) * 2 *  ( maxBallSpeedY - minBallSpeedY )) + maxBallSpeedY*.5; // generate a random ballSpeedY
-                    if (ballSpeedY === 0) {
-                        ballSpeedY = maxBallSpeedY;
-                    }
-                
-                }
+                    resetBallAndPlayerSpeed();
+                   }
     
                 //Check Left side
                 if (roundedBallPositionX < 0) {
-                    coopscore.score = 0; // coop switch? ...
-                    batSpeedY = 10;
+                   coopScore.score = 0;
+                   resetBallAndPlayerSpeed();
                 }
+                //check top side
+                if (roundedBallPositionY < 0) {
+                    ball.speed.y *= -1.01;
+                }
+                //Check Bot side, same as topside, collision with boundary.
+                if (roundedBallPositionY >= gridSizeY) {
+                    ball.speed.y *= -1.01;
+                }
+                //Check the player collision
+                bounceBallWithPlayer();
+
+
             break;
         
             case "Extreme":
@@ -262,63 +298,39 @@ function initialize() {
 
         //Check Top side, so a collision with boundary what has to result in a bounce.
         if (roundedBallPositionY < 0) {
-            ballSpeedY *= -1.01;
+            ball.speed.y *= -1.01;
         }
         //Check Bot side, same as topside, collision with boundary.
         if (roundedBallPositionY >= gridSizeY) {
-            ballSpeedY *= -1.01;
+            ball.speedY *= -1.01;
         }
 
         //move ball
-        ballPositionX = ballPositionX + ballSpeedX * deltaTime;
-        ballPositionY = ballPositionY + ballSpeedY * deltaTime;
+        ball.position.x = ball.position.x + ball.speed.x * deltaTime;
+        ball.position.y = ball.position.y + ball.speed.y * deltaTime;
        
         //player colissions
         //@TODO3: currently player collissions work on exactly hitting the players pixels.. but what if the speed is to high and we skip the bat entirely?
         // think about the difference between continues movement and dot moving an amount units every update loop.
         // HINT: it has something to do with the values of the last frame as well
-        {
-            //check for ball colission with player 1
-            if(roundedBallPositionX === bat1PositionX) { //check if the ballposition is the same as the players x position
-                if(
-                roundedBallPositionY >= bat1PositionY && //the rounded ballPosition is greater or equal to the position of the bat
-                roundedBallPositionY < bat1PositionY + batSizeY //the roudned ballPosition is smaller than the batPosition plus its size
-                //if both statements are true we are connecting vertically with the bat
-                ) {
-                    bounceBallWithPlayer();
-
-                    //fix ball position
-                    ballPositionX = bat1PositionX + 1;
-                }
-            }
+        
             
-            //check for ball colission with player 2
-            if (roundedBallPositionX === bat2PositionX) {
-                if( roundedBallPositionY >= bat2PositionY &&
-                roundedBallPositionY < bat2PositionY +batSizeY
-                ) {
-                    bounceBallWithPlayer();
 
-                    //fix ball position
-                    ballPositionX = bat2PositionX - 1;
-                }
-            }
-        }
         
         //player movement
         {
             //player 1 movement  
-            if(bat1movingUp && bat1PositionY > 0) {
-                bat1PositionY = bat1PositionY - batSpeedY * deltaTime;
-            } else if (bat1movingDown && bat1PositionY <= (gridSizeY - batSizeY)) {
-                bat1PositionY = bat1PositionY + batSpeedY * deltaTime; 
+            if(bat1movingUp && bat1.position.y > 0) {
+                bat1.position.y = bat1.position.y - batSpeedY * deltaTime;
+            } else if (bat1movingDown && bat1.position.y <= (gridSizeY - batSizeY)) {
+                bat1.position.y = bat1.position.y + batSpeedY * deltaTime; 
             }
             
             //player 2 movement
-            if(bat2movingUp && bat2PositionY > 0) {
-                bat2PositionY = bat2PositionY - batSpeedY * deltaTime;
-            } else if (bat2movingDown && bat2PositionY <= (gridSizeY - batSizeY)) {
-                bat2PositionY = bat2PositionY + batSpeedY * deltaTime;
+            if(bat2movingUp && bat2.position.y > 0) {
+                bat2.position.y = bat2.position.y - batSpeedY * deltaTime;
+            } else if (bat2movingDown && bat2.position.y <= (gridSizeY - batSizeY)) {
+                bat2.position.y = bat2.position.y + batSpeedY * deltaTime;
             }
         }
         
@@ -342,23 +354,6 @@ function initialize() {
             case "s":
             bat1movingDown = true;
             break;
-        }
-    });
-    
-    document.addEventListener('keyup', function(e){
-        switch(e.key) {
-            case "w":
-            bat1movingUp = false;
-            break;
-            case "s":
-            bat1movingDown = false;
-            break;
-        }
-    });
-    
-    //player 2 input   
-    document.addEventListener('keydown', function(e){
-        switch(e.key) {
             case "8":
             bat2movingUp = true;
             break;
@@ -370,6 +365,12 @@ function initialize() {
     
     document.addEventListener('keyup', function(e){
         switch(e.key) {
+            case "w":
+            bat1movingUp = false;
+            break;
+            case "s":
+            bat1movingDown = false;
+            break;
             case "8":
             bat2movingUp = false;
             break;

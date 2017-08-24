@@ -1,5 +1,5 @@
 function Bat() {
-    var bat = {
+     var bat = {
         position: {
             x: 0,
             y: 0
@@ -16,4 +16,5 @@ function Bat() {
     };
 
     return bat;
+
 }
