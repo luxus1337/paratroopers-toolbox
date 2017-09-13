@@ -2,7 +2,7 @@
 //config
 {
     //get our drawwable canvas
-    var canvasEl = document.getElementById('canvas');
+    var canvasEl = document.getElementById('game');
     var context = canvasEl.getContext('2d');
 
     //set some globals
