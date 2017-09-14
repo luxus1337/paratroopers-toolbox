@@ -29,7 +29,7 @@ let ballPositionY = Math.round(gridSizeY * .5);
 let batSpeedY = 100;
 let batSizeX = 10;
 let batSizeY = 50;
-let batColor = "yellow";
+let batColor = "#FFFFFF";
 let bat1PositionX = 20;
 let bat1PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
 let bat1movingUp = false;
@@ -80,9 +80,6 @@ function drawGame() {
 	//draw edge
 	drawStrokedRectangle();
 }
-
-
-//let scoreElementLeft = document.getElementById('score-left'); let scoreLeft = 0; //en verderop wanneer het nodig is scoreLeft++; scoreElementLeft.innerHTML = scoreLeft;
 
 //gameloop
 
