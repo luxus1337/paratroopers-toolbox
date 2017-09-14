@@ -32,11 +32,13 @@ let batSizeY = 5;
 let batColor = "#FFFFFF";
 let bat1PositionX = 2;
 let bat1PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
-let bat1movingUp = false
+let bat1movingUp = false;
 let bat1movingDown = false;
 
 let bat2PositionX = gridSizeX - 2;
 let bat2PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
+let bat2movingUp = false;
+let bat2movingDown = false;
 
 
 //render functions
@@ -113,11 +115,15 @@ function update() {
 	if(bat1movingUp) {
 		bat1PositionY = bat1PositionY - batSpeedY * deltaTime;
 	} else if (bat1movingDown) {
-		bat1PositionY = bat1PositionY + batSpeedY * deltaTime; 
+		bat1PositionY = bat1PositionY + batSpeedY * deltaTime;
 	}
-	
-	//@TODO: move player 1 down
-	
+
+	if(bat2movingUp) {
+		bat2PositionY = bat2PositionY - batSpeedY * deltaTime;
+	} else if (bat2movingDown) {
+		bat2PositionY = bat2PositionY + batSpeedY * deltaTime;
+	}
+
 	//@TODO: move player 2 up an down
 	
 	//call the drawGame functions so that we actually draw the game after all variable changes inside the gameloop are done
@@ -136,23 +142,35 @@ window.requestAnimationFrame(update);
 
 //listen for player 1 input
 document.addEventListener('keydown', function(e){
-	switch(e.key) {
-		case "w":
+	switch(e.keyCode) {
+		case 87:
 		bat1movingUp = true;
 		break;
-		case "s":
+		case 83:
 		bat1movingDown = true;
+		break;
+		case 38:
+		bat2movingUp = true;
+		break;
+		case 40:
+		bat2movingDown = true;
 		break;
 	}
 });
 
 document.addEventListener('keyup', function(e){
-	switch(e.key) {
-		case "w":
+	switch(e.keyCode) {
+		case 87:
 		bat1movingUp = false;
 		break;
-		case "s":
+		case 83:
 		bat1movingDown = false;
+		break;
+		case 38:
+		bat2movingUp = false;
+		break;
+		case 40:
+		bat2movingDown = false;
 		break;
 	}
 });
