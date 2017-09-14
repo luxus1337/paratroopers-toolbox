@@ -35,7 +35,7 @@ let bat1PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
 let bat1movingUp = false;
 let bat1movingDown = false;
 
-let bat2PositionX = gridSizeX - 2;
+let bat2PositionX = gridSizeX - 3;
 let bat2PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
 let bat2movingUp = false;
 let bat2movingDown = false;
@@ -56,9 +56,14 @@ function drawRectangle(xPos, yPos, width, height, color = "#FFFFFF") {
 	context.fillRect(Math.round(xPos), Math.round(yPos), width, height);
 }
 
+function drawStrokedRectangle() {
+	context.strokeStyle = "#FFFFFF";
+	context.strokeRect(0, 0, width, height);
+}
+
 function drawGame() {
 	//draw the background
-	drawRectangle(0,0,width,height, backgroundColor);
+	drawRectangle(1,1,width - 2,height - 2, backgroundColor);
 	
 	//draw player 1
 	drawRectangle(bat1PositionX, bat1PositionY, batSizeX, batSizeY, batColor);
@@ -68,6 +73,9 @@ function drawGame() {
 	
 	//draw ball
 	drawRectangle(ballPositionX, ballPositionY, ballSizeX, ballSizeY, ballColor);
+
+	//draw edge
+	drawStrokedRectangle();
 }
 
 
@@ -107,6 +115,7 @@ function update() {
 		}
 	}
 
+	//check for ball colission with player 2
 	if(roundedBallPositionX === bat2PositionX) { //check if the ballposition is the same as the players x position
 		if(
 			roundedBallPositionY >= bat2PositionY && //the rounded ballPosition is greater or equal to the position of the bat
@@ -118,10 +127,8 @@ function update() {
 		}
 	}
 	
-	//@TODO: check for ball colission with player 2
-	
 	//@TODO: check for ball with boundary colission
-	
+
 	//move player 1 up
 	if(bat1movingUp) {
 		bat1PositionY = bat1PositionY - batSpeedY * deltaTime;
