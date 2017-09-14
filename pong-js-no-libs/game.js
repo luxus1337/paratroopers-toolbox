@@ -43,6 +43,8 @@ let bat2movingDown = false;
 let widthMinEdge = width -20;
 let heightMinEdge = height -20;
 
+let scoreLeft = 0;
+let scoreRight = 0;
 
 //render functions
 
@@ -62,6 +64,12 @@ function drawRectangle(xPos, yPos, width, height, color = "#FFFFFF") {
 function drawStrokedRectangle() {
 	context.strokeStyle = "#FFFFFF";
 	context.strokeRect(0, 0, width, height);
+}
+
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Score: "+score, 8, 20);
 }
 
 function drawGame() {
@@ -92,7 +100,7 @@ function update() {
 	
 	//calculate the time difference (deltaTime) with last frame
 	now = performance.now();
-	deltaTime = (now - lastTime) * .001;
+	deltaTime = (now - lastTime) * .0013;
 	lastTime = now;
 	
 	//move ball
@@ -111,7 +119,7 @@ function update() {
 			//if both statements are true we are connecting vertically with the bat
 		) {
 			//ball collided with player so we reverse it's xSpeed so we have a "bounce"
-			ballSpeedX = ballSpeedX * -1;
+			ballSpeedX = ballSpeedX * -1.0008;
 		}
 	}
 
@@ -123,12 +131,12 @@ function update() {
 			//if both statements are true we are connecting vertically with the bat
 		) {
 			//ball collided with player so we reverse it's xSpeed so we have a "bounce"
-			ballSpeedX = ballSpeedX * -1;
+			ballSpeedX = ballSpeedX * -1.0008;
 		}
 	}
 	
 	if(roundedBallPositionY === 10 || roundedBallPositionY === heightMinEdge) { //check if the ballposition is the same as the boundary Y position
-			ballSpeedY = ballSpeedY * -1; //ball collided with boundary so we reverse it's ySpeed so we have a "bounce"
+			ballSpeedY = ballSpeedY * -1.001; //ball collided with boundary so we reverse it's ySpeed so we have a "bounce"
 	}
 
 	if(roundedBallPositionX === 5 || roundedBallPositionX === widthMinEdge + 5) { //check if the ballposition is the same as the boundary X position
