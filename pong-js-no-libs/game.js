@@ -45,6 +45,8 @@ let heightMinEdge = height -20;
 
 let scoreLeft = 0;
 let scoreRight = 0;
+let player1Text = "Player 1"
+let player2Text = "Player 2"
 
 //render functions
 
@@ -52,24 +54,27 @@ let scoreRight = 0;
 * Draw a rectangle at given positon and given size with given color
 * @param {number} xPos 
 * @param {number} yPos 
-* @param {number} xWidth 
-* @param {number} yWidth 
+* @param {number} width 
+* @param {number} height 
 * @param {string} color example and default: "#FFFFFF"
 */
 function drawRectangle(xPos, yPos, width, height, color = "#FFFFFF") {
 	context.fillStyle = color;
-	context.fillRect(Math.round(xPos), Math.round(yPos), width, height);
+	context.fillRect(xPos, yPos, width, height);
 }
 
-function drawStrokedRectangle() {
+function drawBoundary() {
 	context.strokeStyle = "#FFFFFF";
 	context.strokeRect(0, 0, width, height);
 }
 
 function drawScore() {
-    ctx.font = "16px Arial";
-    ctx.fillStyle = "#0095DD";
-    ctx.fillText("Score: "+score, 8, 20);
+	context.textAlign = "center";
+	context.font = "16px Arial";
+	context.fillStyle = "#FFFFFF";
+	context.fillText(player1Text + ": " + scoreLeft, 100, 50);
+	context.fillText(player2Text + ": " + scoreRight, gridSizeX - 100, 50);
+	context.fillText("Score", gridSizeX * .5, 25);
 }
 
 function drawGame() {
@@ -84,9 +89,9 @@ function drawGame() {
 	
 	//draw ball
 	drawRectangle(ballPositionX, ballPositionY, ballSizeX, ballSizeY, ballColor);
-
-	//draw edge
-	drawStrokedRectangle();
+	
+	drawBoundary();
+	drawScore();
 }
 
 //gameloop
@@ -122,36 +127,33 @@ function update() {
 			ballSpeedX = ballSpeedX * -1.0008;
 		}
 	}
-
+	
 	//check for ball colission with player 2
-	if(roundedBallPositionX === bat2PositionX) { //check if the ballposition is the same as the players x position
+	if(roundedBallPositionX === bat2PositionX) {
 		if(
-			roundedBallPositionY >= bat2PositionY && //the rounded ballPosition is greater or equal to the position of the bat
-			roundedBallPositionY < bat2PositionY + batSizeY //the roudned ballPosition is smaller than the batPosition plus its size
-			//if both statements are true we are connecting vertically with the bat
+			roundedBallPositionY >= bat2PositionY && 
+			roundedBallPositionY < bat2PositionY + batSizeY 
 		) {
-			//ball collided with player so we reverse it's xSpeed so we have a "bounce"
 			ballSpeedX = ballSpeedX * -1.0008;
 		}
 	}
 	
 	if(roundedBallPositionY === 10 || roundedBallPositionY === heightMinEdge) { //check if the ballposition is the same as the boundary Y position
-			ballSpeedY = ballSpeedY * -1.001; //ball collided with boundary so we reverse it's ySpeed so we have a "bounce"
+		ballSpeedY = ballSpeedY * -1.001; //ball collided with boundary so we reverse it's ySpeed so we have a "bounce"
 	}
-
+	
 	if(roundedBallPositionX === 5 || roundedBallPositionX === widthMinEdge + 5) { //check if the ballposition is the same as the boundary X position
 		ballSpeedX = 0; //ball collided with boundary so we reverse it's xSpeed so we have a "bounce"
 		ballSpeedY = 0;
-		//return gameOver.message();
-}
-
+	}
+	
 	//move player 1 up
 	if(bat1movingUp && bat1PositionY > 10) { //check if the bat is moved up and stays within boundry
 		bat1PositionY = bat1PositionY - batSpeedY * deltaTime;
 	} else if (bat1movingDown && bat1PositionY < heightMinEdge - batSizeY + 9) { //check if the bat is moved down and stays within boundry
 		bat1PositionY = bat1PositionY + batSpeedY * deltaTime;
 	}
-
+	
 	//move player 2 up
 	if(bat2movingUp && bat2PositionY > 10) { //check if the bat is moved up and stays within boundry
 		bat2PositionY = bat2PositionY - batSpeedY * deltaTime;
