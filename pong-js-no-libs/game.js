@@ -10,38 +10,38 @@ const height = canvasEl.height;
 const width = canvasEl.width;
 
 //x and y
-const gridSizeX = 41;
-const gridSizeY = 31;
-const backgroundColor = "#000000";
+const gridSizeX = 410;
+const gridSizeY = 310;
+const backgroundColor = "rgba(0,0,0,0.1)";
 
 
 //game variables
 
 //speed is in units per second, a unit is a square on the playfield
-let ballSpeedX = 5;
-let ballSpeedY = 3;
-let ballSizeX = 1;
-let ballSizeY = 1;
+let ballSpeedX = 50;
+let ballSpeedY = 30;
+let ballSizeX = 10;
+let ballSizeY = 10;
 let ballColor = "#FFFFFF";
 let ballPositionX = Math.round(gridSizeX * .5);
 let ballPositionY = Math.round(gridSizeY * .5);
 
-let batSpeedY = 10;
-let batSizeX = 1;
-let batSizeY = 5;
-let batColor = "#FFFFFF";
-let bat1PositionX = 2;
+let batSpeedY = 100;
+let batSizeX = 10;
+let batSizeY = 50;
+let batColor = "yellow";
+let bat1PositionX = 20;
 let bat1PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
 let bat1movingUp = false;
 let bat1movingDown = false;
 
-let bat2PositionX = gridSizeX - 3;
+let bat2PositionX = gridSizeX - 30;
 let bat2PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
 let bat2movingUp = false;
 let bat2movingDown = false;
 
-let widthMinEdge = width -2;
-let heightMinEdge = height -2;
+let widthMinEdge = width -20;
+let heightMinEdge = height -20;
 
 
 //render functions
@@ -66,7 +66,7 @@ function drawStrokedRectangle() {
 
 function drawGame() {
 	//draw the background
-	drawRectangle(1,1, widthMinEdge, heightMinEdge, backgroundColor);
+	drawRectangle(10,10, widthMinEdge, heightMinEdge, backgroundColor);
 	
 	//draw player 1
 	drawRectangle(bat1PositionX, bat1PositionY, batSizeX, batSizeY, batColor);
@@ -80,6 +80,9 @@ function drawGame() {
 	//draw edge
 	drawStrokedRectangle();
 }
+
+
+//let scoreElementLeft = document.getElementById('score-left'); let scoreLeft = 0; //en verderop wanneer het nodig is scoreLeft++; scoreElementLeft.innerHTML = scoreLeft;
 
 //gameloop
 
@@ -127,27 +130,27 @@ function update() {
 		}
 	}
 	
-	if(roundedBallPositionY === 1 || roundedBallPositionY === heightMinEdge) { //check if the ballposition is the same as the boundary Y position
+	if(roundedBallPositionY === 10 || roundedBallPositionY === heightMinEdge) { //check if the ballposition is the same as the boundary Y position
 			ballSpeedY = ballSpeedY * -1; //ball collided with boundary so we reverse it's ySpeed so we have a "bounce"
 	}
 
-	if(roundedBallPositionX === 1 || roundedBallPositionX === widthMinEdge) { //check if the ballposition is the same as the boundary X position
+	if(roundedBallPositionX === 5 || roundedBallPositionX === widthMinEdge + 5) { //check if the ballposition is the same as the boundary X position
 		ballSpeedX = 0; //ball collided with boundary so we reverse it's xSpeed so we have a "bounce"
 		ballSpeedY = 0;
 		//return gameOver.message();
 }
 
 	//move player 1 up
-	if(bat1movingUp && bat1PositionY > 1) { //check if the bat is moved up and stays within boundry
+	if(bat1movingUp && bat1PositionY > 10) { //check if the bat is moved up and stays within boundry
 		bat1PositionY = bat1PositionY - batSpeedY * deltaTime;
-	} else if (bat1movingDown && bat1PositionY < heightMinEdge - batSizeY + 1) { //check if the bat is moved down and stays within boundry
+	} else if (bat1movingDown && bat1PositionY < heightMinEdge - batSizeY + 9) { //check if the bat is moved down and stays within boundry
 		bat1PositionY = bat1PositionY + batSpeedY * deltaTime;
 	}
 
 	//move player 2 up
-	if(bat2movingUp && bat2PositionY > 1) { //check if the bat is moved up and stays within boundry
+	if(bat2movingUp && bat2PositionY > 10) { //check if the bat is moved up and stays within boundry
 		bat2PositionY = bat2PositionY - batSpeedY * deltaTime;
-	} else if (bat2movingDown && bat2PositionY < heightMinEdge - batSizeY + 1) { //check if the bat is moved down and stays within boundry
+	} else if (bat2movingDown && bat2PositionY < heightMinEdge - batSizeY + 9) { //check if the bat is moved down and stays within boundry
 		bat2PositionY = bat2PositionY + batSpeedY * deltaTime;
 	}
 	
