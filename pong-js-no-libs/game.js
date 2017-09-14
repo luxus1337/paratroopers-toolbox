@@ -118,13 +118,12 @@ function update() {
 		bat1PositionY = bat1PositionY + batSpeedY * deltaTime;
 	}
 
+	//move player 2 up
 	if(bat2movingUp) {
 		bat2PositionY = bat2PositionY - batSpeedY * deltaTime;
 	} else if (bat2movingDown) {
 		bat2PositionY = bat2PositionY + batSpeedY * deltaTime;
 	}
-
-	//@TODO: move player 2 up an down
 	
 	//call the drawGame functions so that we actually draw the game after all variable changes inside the gameloop are done
 	drawGame();
@@ -140,7 +139,7 @@ window.requestAnimationFrame(update);
 
 //input handling
 
-//listen for player 1 input
+//listen for player input
 document.addEventListener('keydown', function(e){
 	switch(e.keyCode) {
 		case 87:
@@ -174,8 +173,3 @@ document.addEventListener('keyup', function(e){
 		break;
 	}
 });
-
-//player 2 input
-//@TODO: listen for player 2 input
-
-
