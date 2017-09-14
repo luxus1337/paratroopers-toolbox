@@ -40,6 +40,9 @@ let bat2PositionY = Math.round((gridSizeY - batSizeY * .5) * .5);
 let bat2movingUp = false;
 let bat2movingDown = false;
 
+let widthMinEdge = width -2;
+let heightMinEdge = height -2;
+
 
 //render functions
 
@@ -63,7 +66,7 @@ function drawStrokedRectangle() {
 
 function drawGame() {
 	//draw the background
-	drawRectangle(1,1,width - 2,height - 2, backgroundColor);
+	drawRectangle(1,1, widthMinEdge, heightMinEdge, backgroundColor);
 	
 	//draw player 1
 	drawRectangle(bat1PositionX, bat1PositionY, batSizeX, batSizeY, batColor);
@@ -77,7 +80,6 @@ function drawGame() {
 	//draw edge
 	drawStrokedRectangle();
 }
-
 
 //gameloop
 
@@ -125,19 +127,27 @@ function update() {
 		}
 	}
 	
-	//@TODO: check for ball with boundary colission
+	if(roundedBallPositionY === 1 || roundedBallPositionY === heightMinEdge) { //check if the ballposition is the same as the boundary Y position
+			ballSpeedY = ballSpeedY * -1; //ball collided with boundary so we reverse it's ySpeed so we have a "bounce"
+	}
+
+	if(roundedBallPositionX === 1 || roundedBallPositionX === widthMinEdge) { //check if the ballposition is the same as the boundary X position
+		ballSpeedX = 0; //ball collided with boundary so we reverse it's xSpeed so we have a "bounce"
+		ballSpeedY = 0;
+		//return gameOver.message();
+}
 
 	//move player 1 up
 	if(bat1movingUp && bat1PositionY > 1) { //check if the bat is moved up and stays within boundry
 		bat1PositionY = bat1PositionY - batSpeedY * deltaTime;
-	} else if (bat1movingDown && bat1PositionY < height - 6) { //check if the bat is moved down and stays within boundry
+	} else if (bat1movingDown && bat1PositionY < heightMinEdge - batSizeY + 1) { //check if the bat is moved down and stays within boundry
 		bat1PositionY = bat1PositionY + batSpeedY * deltaTime;
 	}
 
 	//move player 2 up
 	if(bat2movingUp && bat2PositionY > 1) { //check if the bat is moved up and stays within boundry
 		bat2PositionY = bat2PositionY - batSpeedY * deltaTime;
-	} else if (bat2movingDown && bat2PositionY < height - 6) { //check if the bat is moved down and stays within boundry
+	} else if (bat2movingDown && bat2PositionY < heightMinEdge - batSizeY + 1) { //check if the bat is moved down and stays within boundry
 		bat2PositionY = bat2PositionY + batSpeedY * deltaTime;
 	}
 	
