@@ -65,7 +65,7 @@ function drawRectangle(xPos, yPos, width, height, color = "#FFFFFF") {
 
 function drawBoundary() {
 	context.strokeStyle = "#FFFFFF";
-	context.strokeRect(0, 0, width, height);
+	context.strokeRect(10, 10, widthMinEdge, heightMinEdge);
 }
 
 function drawScore() {
@@ -79,7 +79,7 @@ function drawScore() {
 
 function drawGame() {
 	//draw the background
-	drawRectangle(10,10, widthMinEdge, heightMinEdge, backgroundColor);
+	drawRectangle(0,0, width, height, backgroundColor);
 	
 	//draw player 1
 	drawRectangle(bat1PositionX, bat1PositionY, batSizeX, batSizeY, batColor);
@@ -91,7 +91,7 @@ function drawGame() {
 	drawRectangle(ballPositionX, ballPositionY, ballSizeX, ballSizeY, ballColor);
 	
 	drawBoundary();
-	drawScore();
+    drawScore();
 }
 
 //gameloop
