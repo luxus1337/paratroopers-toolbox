@@ -106,6 +106,17 @@ function update() {
 			ballSpeedX = ballSpeedX * -1;
 		}
 	}
+
+	if(roundedBallPositionX === bat2PositionX) { //check if the ballposition is the same as the players x position
+		if(
+			roundedBallPositionY >= bat2PositionY && //the rounded ballPosition is greater or equal to the position of the bat
+			roundedBallPositionY < bat2PositionY + batSizeY //the roudned ballPosition is smaller than the batPosition plus its size
+			//if both statements are true we are connecting vertically with the bat
+		) {
+			//ball collided with player so we reverse it's xSpeed so we have a "bounce"
+			ballSpeedX = ballSpeedX * -1;
+		}
+	}
 	
 	//@TODO: check for ball colission with player 2
 	
