@@ -79,8 +79,6 @@ function drawGame() {
 }
 
 
-
-
 //gameloop
 
 let deltaTime = 0;
@@ -130,16 +128,16 @@ function update() {
 	//@TODO: check for ball with boundary colission
 
 	//move player 1 up
-	if(bat1movingUp) {
+	if(bat1movingUp && bat1PositionY > 1) { //check if the bat is moved up and stays within boundry
 		bat1PositionY = bat1PositionY - batSpeedY * deltaTime;
-	} else if (bat1movingDown) {
+	} else if (bat1movingDown && bat1PositionY < height - 6) { //check if the bat is moved down and stays within boundry
 		bat1PositionY = bat1PositionY + batSpeedY * deltaTime;
 	}
 
 	//move player 2 up
-	if(bat2movingUp) {
+	if(bat2movingUp && bat2PositionY > 1) { //check if the bat is moved up and stays within boundry
 		bat2PositionY = bat2PositionY - batSpeedY * deltaTime;
-	} else if (bat2movingDown) {
+	} else if (bat2movingDown && bat2PositionY < height - 6) { //check if the bat is moved down and stays within boundry
 		bat2PositionY = bat2PositionY + batSpeedY * deltaTime;
 	}
 	
