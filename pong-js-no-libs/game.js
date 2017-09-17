@@ -14,17 +14,21 @@ const gridSizeX = 410;
 const gridSizeY = 310;
 const backgroundColor = "rgba(0,0,0,0.1)";
 
-
 //game variables
 
 //speed is in units per second, a unit is a square on the playfield
-let ballSpeedX = 50;
-let ballSpeedY = 30;
+const ballStartposX = Math.round(gridSizeX * .5);
+const ballSartposY = Math.round(gridSizeY * .5);
+let directionMod = Math.random() > 0.5 ? 1: -1;
+let ballStartSpeedX =  directionMod * 50;
+let ballStartSpeedY =  directionMod * 30;
+let ballPositionX = ballStartposX;
+let ballPositionY = ballSartposY;
+let ballSpeedX = ballStartSpeedX;
+let ballSpeedY = ballStartSpeedY;
 let ballSizeX = 10;
 let ballSizeY = 10;
 let ballColor = "#FFFFFF";
-let ballPositionX = Math.round(gridSizeX * .5);
-let ballPositionY = Math.round(gridSizeY * .5);
 
 let batSpeedY = 100;
 let batSizeX = 10;
@@ -45,8 +49,8 @@ let heightMinEdge = height -20;
 
 let scoreLeft = 0;
 let scoreRight = 0;
-let player1Text = "Player 1"
-let player2Text = "Player 2"
+let player1Text = "Player 1";
+let player2Text = "Player 2";
 
 //render functions
 
@@ -165,7 +169,15 @@ function update() {
 	drawGame();
 	
 	//request an animation from the browser to start the next update loop
-	window.requestAnimationFrame(update);
+	if (roundedBallPositionX === widthMinEdge + 5) {
+		scoreLeft++;
+		window.requestAnimationFrame(update);
+	} else if (roundedBallPositionX === 5) {
+		scoreRight++;
+		window.requestAnimationFrame(update);
+	} else {
+		window.requestAnimationFrame(update);
+	}
 }
 
 //start the game loop by requesting an animation frame from the browser
