@@ -170,10 +170,10 @@ function update() {
 	
 	//request an animation from the browser to start the next update loop
 	if (roundedBallPositionX === widthMinEdge + 5) {
-		scoreLeft++;
+		scoreLeft =+ 1;
 		window.requestAnimationFrame(update);
 	} else if (roundedBallPositionX === 5) {
-		scoreRight++;
+		scoreRight =+ 1;
 		window.requestAnimationFrame(update);
 	} else {
 		window.requestAnimationFrame(update);
