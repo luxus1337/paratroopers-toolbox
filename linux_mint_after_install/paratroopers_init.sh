@@ -40,3 +40,8 @@ sudo apt-get install google-chrome-stable
 # todo
 # proper automated docker install
 
+# workspace
+mkdir ~/_para
+cd ~/_para
+echo "work work work"
+
